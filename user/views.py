@@ -27,10 +27,10 @@ class UserViewSet(viewsets.ModelViewSet):
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
 
-        password = serializer.data["password"]
-        user = User.objects.get(pk=serializer.data["id"])
+        password = serializer.data['password']
+        user = User.objects.get(pk=serializer.data['id'])
         user.user_pk = user
         user.set_password(password)
         user.save()
 
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        return Response('user created', status=status.HTTP_201_CREATED, headers=headers)

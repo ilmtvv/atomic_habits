@@ -7,4 +7,4 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
         if request.method in ('HEAD', 'OPTIONS'):
             return True
 
-        return obj.user == request.user
+        return obj.user.pk == request.user.pk

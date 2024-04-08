@@ -16,7 +16,7 @@ class User(AbstractUser):
     REQUIRED_FIELDS = ['username']
 
     def __str__(self):
-        return f'telegraph: {self.telegram}, email: {self.email}'
+        return self.telegram
 
     class Meta:
         verbose_name = 'user'

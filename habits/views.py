@@ -1,4 +1,4 @@
-
+from django_celery_beat.models import PeriodicTask
 from rest_framework import viewsets, permissions, status
 
 from config.utils import create_celery_beat_task
@@ -40,3 +40,16 @@ class HabitViewSet(viewsets.ModelViewSet):
         headers = self.get_success_headers(serializer.data)
         create_celery_beat_task(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        #print(int(kwargs['pk']))
+        PeriodicTask.objects.get(pk=int(kwargs['pk'])).delete()
+        self.perform_destroy(instance)
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+    def perform_update(self, serializer):
+        serializer.save()
+        #print(serializer.data)
+        PeriodicTask.objects.get(pk=serializer.date['id']).delete()
+        create_celery_beat_task(serializer.data)

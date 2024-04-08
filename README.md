@@ -6,8 +6,8 @@ For every useful habit you need to reward yourself or immediately after do a ple
 
 
 # Dependencies
-python = "^3.10"
-django = "4.2.7"
+- python = "^3.10"
+- django = "4.2.7"
 psycopg2-binary = "^2.9.9"
 python-dotenv = "^1.0.1"
 djangorestframework = "^3.14.0"

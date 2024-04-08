@@ -11,7 +11,15 @@ django = "4.2.7"
 psycopg2-binary = "^2.9.9"
 python-dotenv = "^1.0.1"
 djangorestframework = "^3.14.0"
-
+djangorestframework-simplejwt = "^5.3.1"
+ipython = "^8.22.1"
+celery = "^5.3.6"
+django-celery-beat = "^2.6.0"
+redis = "^5.0.3"
+requests = "^2.31.0"
+coverage = "^7.4.4"
+django-cors-headers = "^4.3.1"
+drf-yasg = "^1.21.7"
 
 [build-system]
 requires = ["poetry-core"]

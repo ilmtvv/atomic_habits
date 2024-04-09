@@ -5,7 +5,7 @@ from habits.apps import HabitsConfig
 from habits.views import HabitViewSet, PublicHabitListAPIView
 
 router = DefaultRouter()
-router.register(r'', HabitViewSet,)
+router.register(r'', HabitViewSet, basename='habit')
 
 app_name = HabitsConfig.name
 

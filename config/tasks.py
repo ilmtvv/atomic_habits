@@ -7,6 +7,7 @@ from config.settings import TELEGRAM_BOT_TOKEN
 from habits.models import Habit
 from user.models import User
 
+
 @shared_task
 def telegram_notifications(id):
     habit = Habit.objects.get(pk=id)

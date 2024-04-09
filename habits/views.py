@@ -44,14 +44,14 @@ class HabitViewSet(viewsets.ModelViewSet):
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
-        #print(int(kwargs['pk']))
+        # print(int(kwargs['pk']))
         PeriodicTask.objects.get(pk=int(kwargs['pk'])).delete()
         self.perform_destroy(instance)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
     def perform_update(self, serializer):
         serializer.save()
-        #print(serializer.data)
+        # print(serializer.data)
         PeriodicTask.objects.get(pk=serializer.date['id']).delete()
         create_celery_beat_task(serializer.data)
 

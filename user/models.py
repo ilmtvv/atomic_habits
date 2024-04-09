@@ -9,7 +9,7 @@ class User(AbstractUser):
     email = models.EmailField(unique=True)
     telegram = models.CharField(max_length=33, **null_blank)
 
-    #user_pk = models.IntegerField(**null_blank)
+    # user_pk = models.IntegerField(**null_blank)
     user_pk = models.ForeignKey('self', on_delete=models.SET_NULL, **null_blank)
 
     USERNAME_FIELD = 'email'

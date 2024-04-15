@@ -49,7 +49,7 @@ INSTALLED_APPS = [
 
     'django_celery_beat',
 
-    'corsheaders',
+#    'corsheaders',
 
     'drf_yasg',
 
@@ -96,6 +96,7 @@ DATABASES = {
         'NAME': os.getenv('NAME'),
         'USER': os.getenv('USER_postgres'),
         'PASSWORD': os.getenv('PASSWORD'),
+        'HOST': os.getenv('HOST'),
     }
 }
 
@@ -162,15 +163,16 @@ CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND')
 CELERY_TIMEZONE = TIME_ZONE
 CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
 
 TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:8000',
-]
-
-CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:8000',
-]
-
-CORS_ALLOW_ALL_ORIGINS = False
+# CORS_ALLOWED_ORIGINS = [
+#     'http://localhost:8000',
+# ]
+#
+# CSRF_TRUSTED_ORIGINS = [
+#     'http://localhost:8000',
+# ]
+#
+# CORS_ALLOW_ALL_ORIGINS = False

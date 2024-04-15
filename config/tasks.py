@@ -17,30 +17,50 @@ def telegram_notifications(id):
 
     total_seconds = hours * 3600 + minutes * 60 + seconds
 
-    requests.post(
-        url=f'https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage',
-        data={
-            'chat_id': user_telegram,
-            'test': habit
-        }
+    responce = requests.get(
+        url=f'https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/getUpdates',
     )
 
-    time.sleep(total_seconds)
+    # users = responce.json()['result'][0]['message']['chat']['username']
+    users = {}
+    users_old = users
+    
+    def chek_user():
+        if users_old != users:
+            for result in responce.json()['result']:
+                users[result['message']['chat']['chat_id']] = result['message']['chat']['username']
+        else:
+            users = users_old
+        return (chat_id for chat_id, username in my_dict.items() if username == user_telegram)
 
-    if habit['reward']:
+    chat_id = check_user()
+    
+    if chat_id:
+        
         requests.post(
             url=f'https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage',
             data={
                 'chat_id': user_telegram,
-                'test': habit['reward']
+                'test': habit
             }
         )
-    else:
-        related_habit = Habit.objects.get(pk=habit['related_habit'])
-        requests.post(
-            url=f'https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage',
-            data={
-                'chat_id': user_telegram,
-                'test': Habit.objects.get(pk=related_habit).action
-            }
-        )
+    
+        time.sleep(total_seconds)
+    
+        if habit['reward']:
+            requests.post(
+                url=f'https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage',
+                data={
+                    'chat_id': user_telegram,
+                    'test': habit['reward']
+                }
+            )
+        else:
+            related_habit = Habit.objects.get(pk=habit['related_habit'])
+            requests.post(
+                url=f'https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage',
+                data={
+                    'chat_id': user_telegram,
+                    'test': Habit.objects.get(pk=related_habit).action
+                }
+            )

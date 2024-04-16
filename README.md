@@ -23,14 +23,14 @@ For every useful habit you need to reward yourself or immediately after do a ple
 
 
 # Deploy
-2) Install nginx
-3) Install docker
-4) Instal gunicorn
-5) Git clone
-6) Create demon gunicorn
-7) Run demon
-8) Install settings for nginx
-9) Check ports
-10) Docker-compose build in .
-11) Docker up
-12) Docker-compose exec app python manage.py migrate
+1) Install nginx
+2) Install docker
+3) Instal gunicorn
+4) Git clone
+5) Create demon gunicorn
+6) Run demon
+7) Install settings for nginx
+8) Check ports
+9) Docker-compose build in .
+10) Docker up
+11) Docker-compose exec app python manage.py migrate

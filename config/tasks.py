@@ -23,15 +23,11 @@ def telegram_notifications(id):
 
     # users = responce.json()['result'][0]['message']['chat']['username']
     users = {}
-    users_old = users
-    
+# memory
     def chek_user():
-        if users_old != users:
-            for result in responce.json()['result']:
-                users[result['message']['chat']['chat_id']] = result['message']['chat']['username']
-        else:
-            users = users_old
-        return (chat_id for chat_id, username in my_dict.items() if username == user_telegram)
+        for result in responce.json()['result']:
+            users[result['message']['chat']['chat_id']] = result['message']['chat']['username']
+        return (chat_id for chat_id, username in users.items() if username == user_telegram)
 
     chat_id = check_user()
     
